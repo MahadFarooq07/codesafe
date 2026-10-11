@@ -1,7 +1,7 @@
 // Builds the extension into dist/ with esbuild.
 //
 //   node build.mjs            development build (keeps the manifest "key" so the ID is stable)
-//   node build.mjs --zip      also packages dist/ into ../web/public/codesafe-extension.zip
+//   node build.mjs --zip      also packages dist/ into release/codesafe-extension.zip (attach it to a GitHub Release)
 //   node build.mjs --release  strips the "key" field (required for Chrome Web Store uploads)
 //
 // OAuth settings come from oauth.config.json (git-ignored; see oauth.config.example.json),
@@ -86,7 +86,7 @@ if (!cfg.key && !release) {
 }
 
 if (wantZip) {
-  const outDir = path.join(root, "..", "web", "public");
+  const outDir = path.join(root, "release");
   mkdirSync(outDir, { recursive: true });
   const zipPath = path.join(outDir, "codesafe-extension.zip");
   writeZip(dist, zipPath);

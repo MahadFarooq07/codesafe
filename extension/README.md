@@ -8,7 +8,7 @@ Shows the latest verification code from your Gmail in a pill above any code fiel
 
 ```bash
 pnpm ext:build    # -> extension/dist
-pnpm ext:zip      # also writes web/public/codesafe-extension.zip
+pnpm ext:zip      # also writes extension/release/codesafe-extension.zip (attach to a GitHub Release)
 pnpm --filter @codesafe/extension run test        # extractor + security tests
 pnpm --filter @codesafe/extension run release     # build without the "key" field, for the Web Store
 ```

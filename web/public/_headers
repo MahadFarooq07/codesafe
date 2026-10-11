@@ -10,6 +10,3 @@
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
   Cross-Origin-Opener-Policy: same-origin
 
-/codesafe-extension.zip
-  Content-Type: application/zip
-  Content-Disposition: attachment; filename="codesafe-extension.zip"

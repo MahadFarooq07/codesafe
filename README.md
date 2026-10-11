@@ -29,7 +29,7 @@ If the code came from a different site than the one you're on, or Gmail couldn't
 | Path | What it is |
 | --- | --- |
 | `extension/` | The Chrome extension (Manifest V3, TypeScript, esbuild). Setup guide in [`extension/README.md`](extension/README.md). |
-| `web/` | The landing page (Next.js App Router, static export, Tailwind) with the download and privacy policy. |
+| `web/` | The landing page (Next.js App Router, static export, Tailwind) with install info and the privacy policy. |
 | `video/` | The animated explainer film (React + Framer Motion). |
 | `docs/` | The exported film and demo GIF. |
 
@@ -52,7 +52,7 @@ pnpm web:dev        # landing page on http://127.0.0.1:3000
 pnpm video:dev      # explainer film on http://127.0.0.1:5174
 pnpm test           # extractor + security tests
 pnpm typecheck      # all packages
-pnpm ext:zip        # rebuild the downloadable zip served by the landing page
+pnpm ext:zip        # package extension/release/codesafe-extension.zip for a GitHub Release
 pnpm --filter @codesafe/web run build   # static site -> web/out (deploy that folder anywhere)
 ```
 

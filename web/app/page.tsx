@@ -3,7 +3,7 @@ import { Demo } from '@/components/demo';
 import { Compare } from '@/components/compare';
 import { Film } from '@/components/film';
 import { Reveal } from '@/components/reveal';
-import { Nav, Footer, AddButton } from '@/components/chrome';
+import { Nav, Footer, GitHubButton } from '@/components/chrome';
 import { PrivacyCard, Faq, type PrivacyPoint, type FaqItem } from '@/components/disclosure';
 
 const Eyebrow = ({ children }: { children: ReactNode }) => (
@@ -35,7 +35,7 @@ const faqs: FaqItem[] = [
   { q: 'What does it store?', a: 'Three things: the code, the sender’s domain, and when it arrived. They are kept in session memory for 5 minutes, or until the code is used, and then wiped. Nothing is saved to disk and nothing is sent to us. There is no “us” server.' },
   { q: 'Why does Google say “unverified app”?', a: 'Google requires a security review for any app requesting Gmail scopes, and CodeSafe’s review is in progress. Until it completes, Google shows this warning. The code is open source, so you can read exactly what it does before you approve.' },
   { q: 'Which sites does it work on?', a: 'Any site with a one-time code field, including split inputs with one box per digit. If a site uses an unusual field, ⌘⇧Y (Ctrl+Shift+Y on Windows and Linux) pastes the latest code into the text field your cursor is in.' },
-  { q: 'How do I install it?', a: 'Download the zip, unzip it, open chrome://extensions, turn on Developer mode, and choose Load unpacked. A Chrome Web Store listing is on the way.' },
+  { q: 'How do I install it?', a: 'Open CodeSafe on GitHub and follow the README to build it, then open chrome://extensions, turn on Developer mode, and choose Load unpacked. A Chrome Web Store listing is on the way.' },
   { q: 'How do I turn it off?', a: 'Sign out from the CodeSafe popup, or revoke access at myaccount.google.com/permissions. Removing the extension also removes everything it held.' },
 ];
 
@@ -60,10 +60,10 @@ export default function Home() {
           <Reveal delay={240}>
             <div className="mt-9 flex flex-col items-center gap-3">
               <div className="flex items-center gap-6">
-                <AddButton />
+                <GitHubButton />
                 <a href="#how" className="text-[16px] text-[#0A84FF] hover:underline" data-testid="link-see-how">See how it works ›</a>
               </div>
-              <p className="text-[12px] text-[#86868B]">Download, then load it in chrome://extensions → Load unpacked</p>
+              <p className="text-[12px] text-[#86868B]">Free and open source. Install steps are in the README.</p>
             </div>
           </Reveal>
           <Reveal delay={360} className="mt-16 sm:mt-20"><Demo /></Reveal>
@@ -152,8 +152,8 @@ export default function Home() {
             <h2 className="mx-auto max-w-[700px] text-[40px] font-semibold leading-[1.05] tracking-[-0.04em] sm:text-[60px]">Stop alt-tabbing.</h2>
             <p className="mt-4 text-[18px] text-[#6E6E73]">Free forever. Open source. Under 60 KB.</p>
             <div className="mt-9 flex flex-col items-center gap-3">
-              <AddButton />
-              <p className="text-[12px] text-[#86868B]">Download, then load it in chrome://extensions → Load unpacked</p>
+              <GitHubButton />
+              <p className="text-[12px] text-[#86868B]">Free and open source. Install steps are in the README.</p>
             </div>
           </Reveal>
         </section>
