@@ -1,4 +1,4 @@
-import { DEFAULT_SETTINGS, type Msg, type Settings, type State } from "../shared/types";
+import { CODE_RE, DEFAULT_SETTINGS, type PopupMsg, type Settings, type State, type ToPageMsg } from "../shared/types";
 
 const app = document.getElementById("app") as HTMLElement;
 
@@ -7,10 +7,10 @@ const LOGO =
 const CHECK_ICON =
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>';
 
-const isMac = navigator.platform.toLowerCase().includes("mac");
-const SHORTCUT = isMac ? "<kbd>⌘</kbd> <kbd>⇧</kbd> <kbd>V</kbd>" : "<kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>V</kbd>";
+const isMac = /mac/i.test(navigator.userAgent);
+const SHORTCUT = isMac ? "<kbd>⌘</kbd> <kbd>⇧</kbd> <kbd>Y</kbd>" : "<kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Y</kbd>";
 
-function send<T = unknown>(msg: Msg): Promise<T | undefined> {
+function send<T = unknown>(msg: PopupMsg): Promise<T | undefined> {
   return new Promise((resolve) => {
     chrome.runtime.sendMessage(msg, (r: T) => {
       void chrome.runtime.lastError;
@@ -60,7 +60,7 @@ async function render(state: State | undefined): Promise<void> {
       break;
     case "found":
       body = `<button class="card suggestion" data-act="copy" data-code="${esc(state.code.code)}" aria-label="Copy code ${esc(state.code.code)}">
-          <span class="from">From Gmail</span>
+          <span class="from">From ${esc(state.code.sender)}${state.code.verified ? "" : " · unverified sender"}</span>
           <span class="code">${esc(state.code.code)}</span>
           <span class="hint-copy">Click to copy</span>
         </button>`;
@@ -104,6 +104,7 @@ app.addEventListener("click", async (e) => {
       break;
     case "copy": {
       const code = el.dataset.code ?? "";
+      if (!CODE_RE.test(code)) break;
       await navigator.clipboard.writeText(code);
       const hint = el.querySelector(".hint-copy");
       if (hint) hint.innerHTML = `${CHECK_ICON}Copied`;
@@ -120,8 +121,10 @@ app.addEventListener("change", (e) => {
   if (key) void send({ type: "SET_SETTINGS", payload: { [key]: el.checked } });
 });
 
-chrome.runtime.onMessage.addListener((msg: Msg) => {
-  if (msg.type === "STATE") void render(msg.payload);
+chrome.runtime.onMessage.addListener((msg: ToPageMsg, sender) => {
+  // Only the service worker (an extension context without a tab) may update us.
+  if (sender.id !== chrome.runtime.id || sender.tab) return;
+  if (msg?.type === "STATE") void render(msg.payload);
 });
 
 void send<State>({ type: "GET_STATE" }).then(render);

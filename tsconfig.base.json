@@ -13,7 +13,7 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
-    "strictFunctionTypes": false,
+    "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "strictPropertyInitialization": true,
     "useUnknownInCatchVariables": true,
@@ -21,6 +21,6 @@
     "skipLibCheck": true,
     "target": "es2022",
     "types": [],
-    "customConditions": ["workspace"]
+    "customConditions": []
   }
 }

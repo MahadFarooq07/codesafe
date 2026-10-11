@@ -44,9 +44,19 @@ Thumbs.db
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 
-# Replit
+# Local caches
 .cache/
 .local/
 
 # Local exports from the preview pane
 /*.mp4
+
+# Secrets and local OAuth configuration (never commit)
+key.pem
+*.pem
+.env
+.env.*
+extension/oauth.config.json
+
+# Local editor/agent config
+.claude/

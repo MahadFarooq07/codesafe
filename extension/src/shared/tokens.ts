@@ -13,6 +13,7 @@ export const TOKENS_CSS = `
   --accent: #0a84ff;
   --success: #34c759;
   --danger: #ff3b30;
+  --caution: #b25000;
   --r-input: 12px;
   --r-card: 16px;
   --r-pill: 999px;

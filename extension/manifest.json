@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
   "name": "CodeSafe",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Verification codes from Gmail, pasted in one tap. Read-only. Nothing leaves your browser.",
+  "minimum_chrome_version": "116",
   "icons": {
     "16": "icons/16.png",
     "32": "icons/32.png",
@@ -23,23 +24,30 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": ["https://*/*", "http://*/*"],
       "js": ["content.js"],
       "run_at": "document_idle",
-      "all_frames": true
+      "all_frames": true,
+      "match_about_blank": false
     }
   ],
   "permissions": ["identity", "storage", "clipboardWrite", "alarms", "offscreen"],
   "host_permissions": ["https://gmail.googleapis.com/*"],
+  "content_security_policy": {
+    "extension_pages": "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src https://gmail.googleapis.com https://oauth2.googleapis.com; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+  },
+  "externally_connectable": {
+    "ids": []
+  },
   "oauth2": {
-    "client_id": "PASTE_YOUR_CLIENT_ID.apps.googleusercontent.com",
+    "client_id": "__CHROME_CLIENT_ID__",
     "scopes": ["https://www.googleapis.com/auth/gmail.readonly"]
   },
   "commands": {
     "paste-latest-code": {
       "suggested_key": {
-        "default": "Ctrl+Shift+V",
-        "mac": "Command+Shift+V"
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y"
       },
       "description": "Paste the latest verification code"
     }

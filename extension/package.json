@@ -1,13 +1,16 @@
 {
-  "name": "@workspace/codesafe-extension",
-  "version": "1.0.0",
+  "name": "@codesafe/extension",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "description": "CodeSafe Chrome extension (Manifest V3): verification codes from Gmail, pasted in one tap.",
   "scripts": {
     "build": "node ./build.mjs",
     "zip": "node ./build.mjs --zip",
-    "test": "tsx test/extract.test.ts",
+    "release": "node ./build.mjs --release",
+    "keygen": "node ./scripts/keygen.mjs",
+    "test": "tsx test/extract.test.ts && tsx test/security.test.ts",
+    "test:page": "node ./test/serve.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {

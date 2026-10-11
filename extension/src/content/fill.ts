@@ -16,17 +16,25 @@ function fillBox(box: HTMLInputElement, ch: string): void {
   box.dispatchEvent(new KeyboardEvent("keyup", { key: ch, bubbles: true }));
 }
 
+/** Fills only the given field (or its split-box group); never anything else on the page. */
 export function fillCode(target: HTMLInputElement, code: string, group: HTMLInputElement[]): void {
+  if (!target.isConnected) return;
   if (group.length > 1) {
     const chars = code.split("");
     group.forEach((box, i) => {
-      if (i < chars.length) fillBox(box, chars[i]);
+      if (i < chars.length && box.isConnected) fillBox(box, chars[i]);
     });
     const last = group[Math.min(chars.length, group.length) - 1];
     last?.focus();
     return;
   }
   target.focus();
-  setValue(target, code);
-  target.setSelectionRange?.(code.length, code.length);
+  // Respect maxlength so we never overflow into a neighbouring field.
+  const value = target.maxLength > 0 ? code.slice(0, target.maxLength) : code;
+  setValue(target, value);
+  try {
+    target.setSelectionRange(value.length, value.length);
+  } catch {
+    // type="number" inputs don't support selection ranges.
+  }
 }

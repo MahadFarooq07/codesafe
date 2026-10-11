@@ -30,9 +30,19 @@
     </div>
   </div>
   <div>
+    <h3>Promo code (control: no pill)</h3>
+    <input class="single" name="promo_code" placeholder="Promo code" />
+  </div>
+  <div>
+    <h3>Hidden field (control: no pill, even when focused by script)</h3>
+    <input id="hidden-otp" autocomplete="one-time-code" style="opacity:0;width:1px;height:1px" />
+    <button type="button" id="focus-hidden">Focus hidden field</button>
+  </div>
+  <div>
     <h3>Not a code field (control)</h3>
     <input class="single" name="email" placeholder="Email address" />
   </div>
-  <p>Load the unpacked extension from <code>extension/dist</code>, enable "Allow access to file URLs" for it, then open this file. Focus a field: the pill should say "Checking Gmail…" and, once a matching email is found, show the code. Click it (or press the shortcut) to fill.</p>
+  <p>Run <code>pnpm --filter @codesafe/extension run test:page</code> and open <code>http://127.0.0.1:8787/</code> (CodeSafe only runs on http/https pages). Focus a field: the pill shows three dots while it checks Gmail, then the code. Click it, or press Ctrl+Shift+Y / &#8984;&#8679;Y, to fill. Codes from a sender whose site does not match the page (always the case on this test page) show in amber and need two clicks.</p>
+<script src="otp.js"></script>
 </body>
 </html>

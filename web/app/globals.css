@@ -1,0 +1,35 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, Menlo, Consolas, monospace;
+}
+
+:root {
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --hair: rgba(27, 28, 29, .08);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: #FBFDFF;
+  color: #1B1C1D;
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hair { box-shadow: 0 0 0 .5px rgba(27, 28, 29, .1); }
+
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+
+@keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.8); } }
+.pulse-dot { animation: pulse-dot 1.1s var(--ease) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .pulse-dot { animation: none; }
+  html { scroll-behavior: auto; }
+}
