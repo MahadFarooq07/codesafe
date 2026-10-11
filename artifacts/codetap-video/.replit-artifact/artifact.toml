@@ -1,0 +1,29 @@
+kind = "video"
+videoAspectRatio = "16:9"
+previewPath = "/codetap-video/"
+title = "CodeSafe Film"
+description = "Short Apple-style explainer film showing how the CodeSafe Chrome extension looks and works: a code arrives in Gmail, a pill appears above the code field, one click fills it."
+version = "1.0.0"
+id = "artifacts/codetap-video"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/codetap-video/" ]
+localPort = 18988
+
+[services.development]
+run = "pnpm --filter @workspace/codetap-video run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/codetap-video", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/codetap-video/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18988"
+BASE_PATH = "/codetap-video/"

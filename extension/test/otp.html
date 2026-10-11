@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>CodeSafe test page</title>
+<style>
+  body { font: 16px -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif; color: #1b1c1d; background: #fbfdff; padding: 80px 40px; display: grid; gap: 48px; max-width: 520px; margin: 0 auto; }
+  h3 { font-size: 15px; font-weight: 600; margin: 0 0 12px; color: #6e6e73; }
+  input { font: 24px -apple-system, sans-serif; padding: 12px; width: 52px; height: 56px; text-align: center; border: 1px solid rgba(0,0,0,.12); border-radius: 12px; background: #fff; }
+  input:focus { outline: 2px solid #0a84ff; outline-offset: -1px; }
+  .single { width: 240px; text-align: left; letter-spacing: .1em; }
+  .boxes { display: flex; gap: 10px; }
+  p { color: #6e6e73; font-size: 13px; line-height: 1.5; }
+</style>
+</head>
+<body>
+  <div>
+    <h3>Single input (autocomplete="one-time-code")</h3>
+    <input class="single" autocomplete="one-time-code" inputmode="numeric" placeholder="Enter code" />
+  </div>
+  <div>
+    <h3>Single input (matched by name)</h3>
+    <input class="single" name="verification_code" placeholder="Verification code" />
+  </div>
+  <div>
+    <h3>Six split boxes</h3>
+    <div class="boxes">
+      <input maxlength="1" inputmode="numeric" /><input maxlength="1" inputmode="numeric" /><input maxlength="1" inputmode="numeric" />
+      <input maxlength="1" inputmode="numeric" /><input maxlength="1" inputmode="numeric" /><input maxlength="1" inputmode="numeric" />
+    </div>
+  </div>
+  <div>
+    <h3>Not a code field (control)</h3>
+    <input class="single" name="email" placeholder="Email address" />
+  </div>
+  <p>Load the unpacked extension from <code>extension/dist</code>, enable "Allow access to file URLs" for it, then open this file. Focus a field: the pill should say "Checking Gmail…" and, once a matching email is found, show the code. Click it (or press the shortcut) to fill.</p>
+</body>
+</html>
